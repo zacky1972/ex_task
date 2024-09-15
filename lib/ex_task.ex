@@ -1,6 +1,6 @@
 defmodule ExTask do
   @moduledoc """
-  Documentation for `ExTask`.
+  ExTask: Task, a task runner / build tool, for Mix
   """
 
   @doc """
