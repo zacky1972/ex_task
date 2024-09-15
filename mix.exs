@@ -1,12 +1,13 @@
 defmodule ExTask.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
   @source_url "https://github.com/zacky1972/ex_task"
 
   def project do
     [
       app: :ex_task,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       name: "ExTask",
@@ -45,8 +46,10 @@ defmodule ExTask.MixProject do
 
   defp docs do
     [
-      main: "ExTask",
-      extras: ["README.md"]
+      main: "Mix.Tasks.Compile.ExTask",
+      extras: ["README.md"],
+      source_ref: "v#{@version}",
+      source_url: @source_url
     ]
   end
 end
