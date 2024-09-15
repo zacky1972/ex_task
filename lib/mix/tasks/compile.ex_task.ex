@@ -31,6 +31,10 @@ defmodule Mix.Tasks.Compile.ExTask do
   def run(_args) do
     {:ok, _} = Application.ensure_all_started(:req)
 
+    env =
+      Mix.Project.config()
+      |> ExTask.Constants.default_env()
+
     unless File.exists?(ExTask.Constants.bin_dir()) do
       File.mkdir(ExTask.Constants.bin_dir())
     end
@@ -44,7 +48,11 @@ defmodule Mix.Tasks.Compile.ExTask do
       ExTask.Constants.bin_dir()
     ])
 
-    case System.cmd(ExTask.Constants.executable(), [], cd: File.cwd!(), stderr_to_stdout: true) do
+    case System.cmd(ExTask.Constants.executable(), [],
+           cd: File.cwd!(),
+           stderr_to_stdout: true,
+           env: env
+         ) do
       {msg, 0} -> IO.puts(msg)
       {msg, _} -> raise Mix.Error, msg
     end

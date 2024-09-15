@@ -52,11 +52,39 @@ defmodule Mix.Tasks.Compile.ExTaskTest do
     end)
   end
 
+  test "default env" do
+    in_fixture(fn ->
+      File.write!("Taskfile.yml", """
+      version: '3'
+
+      tasks:
+        default:
+          cmds:
+            - echo $MIX_TARGET
+            - echo $MIX_ENV
+            - echo $MIX_BUILD_PATH
+            - echo $MIX_COMPILE_PATH
+            - echo $MIX_DEPS_PATH
+          silent: true
+      """)
+
+      with_project_config([], fn ->
+        assert capture_io(fn -> run([]) end) =~ """
+               host
+               test
+               #{@fixture_project}/_build/test
+               #{@fixture_project}/_build/test/lib/my_app/ebin
+               #{@fixture_project}/deps
+               """
+      end)
+    end)
+  end
+
   defp in_fixture(fun) do
     File.cd!(@fixture_project, fun)
   end
 
-  # defp with_project_config(config, fun) do
-  #  Mix.Project.in_project(:my_app, @fixture_project, config, fn _ -> fun.() end)
-  # end
+  defp with_project_config(config, fun) do
+    Mix.Project.in_project(:my_app, @fixture_project, config, fn _ -> fun.() end)
+  end
 end
