@@ -13,7 +13,14 @@ defmodule Mix.Tasks.Compile.ExTask do
       File.mkdir(ExTask.Constants.bin_dir())
     end
 
-    System.cmd("sh", ["-c", Req.get!("https://taskfile.dev/install.sh").body, "--", "-d", "-b", ExTask.Constants.bin_dir()])
+    System.cmd("sh", [
+      "-c",
+      Req.get!("https://taskfile.dev/install.sh").body,
+      "--",
+      "-d",
+      "-b",
+      ExTask.Constants.bin_dir()
+    ])
 
     case System.cmd(ExTask.Constants.executable(), [], cd: File.cwd!(), stderr_to_stdout: true) do
       {_msg, 0} -> :ok
