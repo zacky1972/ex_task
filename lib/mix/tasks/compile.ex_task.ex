@@ -1,6 +1,26 @@
 defmodule Mix.Tasks.Compile.ExTask do
   @moduledoc """
   Runs Task, a task runner / build tool, in the current project.
+
+  This task installs Task, and runs `task` in the current project;
+  any output coming from `task` is printed in real-time on stdout.
+
+  ## Configuration
+
+  This compiler can be configured through the return value of the `project/0` function in `mix.exs`;
+  for example:
+
+  ```elixir
+    def project() do
+      [
+        app: :myapp,
+        compilers: [:ex_task] ++ Mix.compilers,
+        deps: deps()
+      ]
+    end
+  ```
+
+  No option is available now.
   """
 
   use Mix.Task
