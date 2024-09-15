@@ -40,7 +40,7 @@ defmodule Mix.Tasks.Compile.ExTaskTest do
     File.cd!(@fixture_project, fun)
   end
 
-  #defp with_project_config(config, fun) do
+  # defp with_project_config(config, fun) do
   #  Mix.Project.in_project(:my_app, @fixture_project, config, fn _ -> fun.() end)
-  #end
+  # end
 end
