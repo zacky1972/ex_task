@@ -24,3 +24,6 @@ ex_task-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Test files
+/test/fixtures/my_app/Taskfile.yml
