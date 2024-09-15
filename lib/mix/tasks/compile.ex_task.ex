@@ -23,7 +23,7 @@ defmodule Mix.Tasks.Compile.ExTask do
     ])
 
     case System.cmd(ExTask.Constants.executable(), [], cd: File.cwd!(), stderr_to_stdout: true) do
-      {_msg, 0} -> :ok
+      {msg, 0} -> IO.puts(msg)
       {msg, _} -> raise Mix.Error, msg
     end
   end

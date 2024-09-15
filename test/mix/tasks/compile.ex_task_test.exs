@@ -36,6 +36,22 @@ defmodule Mix.Tasks.Compile.ExTaskTest do
     end)
   end
 
+  test "running with Taskfile.yml" do
+    in_fixture(fn ->
+      File.write!("Taskfile.yml", """
+      version: '3'
+
+      tasks:
+        default:
+          cmds:
+            - echo 'Hello World from Task!'
+          silent: true
+      """)
+
+      assert capture_io(fn -> run([]) end) =~ "Hello World from Task!\n"
+    end)
+  end
+
   defp in_fixture(fun) do
     File.cd!(@fixture_project, fun)
   end
