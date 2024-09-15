@@ -21,6 +21,24 @@ defmodule Mix.Tasks.Compile.ExTask do
   ```
 
   No option is available now.
+
+  ## Default environment variables
+
+  There are also several default environment variables set:
+
+  * `MIX_TARGET`
+  * `MIX_ENV`
+  * `MIX_BUILD_PATH` - same as [`Mix.Project.build_path/0`](https://hexdocs.pm/mix/Mix.Project.html#build_path/0)
+  * `MIX_APP_PATH` - same as [`Mix.Project.app_path/0`](https://hexdocs.pm/mix/Mix.Project.html#app_path/0)
+  * `MIX_COMPILE_PATH` - same as [`Mix.Project.compile_path/0`](https://hexdocs.pm/mix/Mix.Project.html#compile_path/0)
+  * `MIX_CONSOLIDATION_PATH` - same as [`Mix.Project.consolidation_path/0`](https://hexdocs.pm/mix/Mix.Project.html#consolidation_path/0)
+  * `MIX_DEPS_PATH` - same as [`Mix.Project.deps_path/0`](https://hexdocs.pm/mix/Mix.Project.html#deps_path/0)
+  * `MIX_MANIFEST_PATH` - same as [`Mix.Project.manifest_path/0`](https://hexdocs.pm/mix/Mix.Project.html#manifest_path/0)
+  * `ERL_EI_LIBDIR`
+  * `ERL_EI_INCLUDE_DIR`
+  * `ERTS_INCLUDE_DIR`
+  * `ERL_INTERFACE_LIB_DIR`
+  * `ERL_INTERFACE_INCLUDE_DIR`
   """
 
   use Mix.Task
