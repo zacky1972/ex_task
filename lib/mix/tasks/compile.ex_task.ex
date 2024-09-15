@@ -29,6 +29,8 @@ defmodule Mix.Tasks.Compile.ExTask do
 
   @doc false
   def run(_args) do
+    {:ok, _} = Application.ensure_all_started(:req)
+
     unless File.exists?(ExTask.Constants.bin_dir()) do
       File.mkdir(ExTask.Constants.bin_dir())
     end
