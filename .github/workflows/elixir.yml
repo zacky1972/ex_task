@@ -15,18 +15,46 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
 
     name: Build and test
     runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - pair:
+              elixir: 1.15.8
+              otp: 25.3.2.13
+          - pair:
+              elixir: 1.15.8
+              otp: 26.2.5.3
+          - pair:
+              elixir: 1.16.3
+              otp: 25.3.2.13
+          - pair:
+              elixir: 1.16.3
+              otp: 26.2.5.3
+          - pair:
+              elixir: 1.17.2
+              otp: 25.3.2.13
+          - pair:
+              elixir: 1.17.2
+              otp: 26.2.5.3
+          - pair:
+              elixir: 1.17.2
+              otp: 27.0.1
+            lint: lint
 
     steps:
     - uses: actions/checkout@v4
     - name: Set up Elixir
       uses: erlef/setup-beam@b9c58b0450cd832ccdb3c17cc156a47065d2114f # v1.18.1
       with:
-        elixir-version: '1.15.2' # [Required] Define the Elixir version
-        otp-version: '26.0'      # [Required] Define the Erlang/OTP version
+        elixir-version: ${{ matrix.pair.elixir }}
+        otp-version: ${{ matrix.pair.otp }}
     - name: Restore dependencies cache
       uses: actions/cache@v4
       with:
@@ -34,6 +62,17 @@ jobs:
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
-      run: mix deps.get
+      run: mix deps.get --only test
+    - name: Check format
+      run: mix format --check-formatted
+      if: ${{ matrix.lint }}
+    - name: Check unused dependencies
+      run: mix deps.get && mix deps.unlock --check-unused
+      if: ${{ matrix.lint }}
+    - name: Compile Dependencies
+      run: mix deps.compile
+    - name: Compile with warning as errors
+      run: mix compile --warnings-as-errors
+      if: ${{ matrix.lint }}
     - name: Run tests
       run: mix test
