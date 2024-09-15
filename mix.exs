@@ -1,7 +1,7 @@
 defmodule ExTask.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.3.0"
   @source_url "https://github.com/zacky1972/ex_task"
 
   def project do
