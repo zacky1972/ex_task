@@ -38,14 +38,14 @@ jobs:
               elixir: 1.16.3
               otp: 26.2.5.3
           - pair:
-              elixir: 1.17.2
+              elixir: 1.17.3
               otp: 25.3.2.13
           - pair:
-              elixir: 1.17.2
+              elixir: 1.17.3
               otp: 26.2.5.3
           - pair:
-              elixir: 1.17.2
-              otp: 27.0.1
+              elixir: 1.17.3
+              otp: 27.1
             lint: lint
 
     steps:
