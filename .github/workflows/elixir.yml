@@ -45,16 +45,16 @@ jobs:
               otp: 26.2.5.6
           - pair:
               elixir: 1.17.3
-              otp: 27.1.3
+              otp: 27.2
           - pair:
-              elixir: 1.18.0-rc.0
+              elixir: 1.18.0
               otp: 25.3.2.16
           - pair:
-              elixir: 1.18.0-rc.0
+              elixir: 1.18.0
               otp: 26.2.5.6
           - pair:
-              elixir: 1.18.0-rc.0
-              otp: 27.1.3
+              elixir: 1.18.0
+              otp: 27.2
             lint: lint
 
     steps:
